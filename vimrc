@@ -109,6 +109,4 @@ set splitbelow                  " Puts new split windows to the bottom of the cu
 set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
 set noexpandtab                 "Do not extand tab
 " preceding line best in a plugin but here for now.
-
-
-
+vnoremap // y/<C-R>"<CR>
