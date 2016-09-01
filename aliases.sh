@@ -1,0 +1,264 @@
+
+export ALIASES=$(cd `dirname "${BASH_SOURCE[0]}"` && pwd)/`basename "${BASH_SOURCE[0]}"`
+alias lt='ls -l -t'
+alias asu='sudo su'
+alias tfx='tar xavf'
+alias ggrep='grep -Irs --exclude={cscope.out,tags,*.svn*,*.o,*.o.cmd,*.ko,*.vtg,*.vpw,*.vpj,*.vpwhistu,*.tar,*.tar.*,*.siginfo,*.cproject,*cscope.files} --exclude-dir={/.svn/,git-svn} --exclude-dir=".svn"'
+alias ngrep='ggrep -n'
+alias igrep='ngrep -i'
+alias slick='~developer/slickedit/bin/vs'
+alias afind='find . -not -name "*.ko" -not -name "*.o" -not -iwholename "*.svn*" -not -iwholename "*.git*"'
+alias cv='cp -v'
+
+
+alias cd1='cd ..'
+alias cd2='cd ../../'
+alias cd3='cd ../../../'
+alias cd4='cd ../../../../'
+alias arm='rm -rvf'
+alias touchall='find . -exec touch {} \;'
+alias touchold='touch -a -m -t 201001010000.00'
+alias arefresh='source /home/developer/work/myScripts/aliases.sh'
+alias PDF='okular'
+
+#aliases for compilation
+alias gc="gcc -std=c89 -pedantic -Wall -Werror"
+alias ggc="gcc -std=c89 -pedantic -Wall" #gentle gc
+alias g+="g++ -std=c++98 -pedantic -Wall -Werror"
+alias gg+="g++ -std=c++98 -pedantic -Wall" #gentle g+
+
+# related aliases
+alias svmeld="svn diff --diff-cmd='meld'"
+alias svrevert="svn revert --depth=infinity"
+alias svst="svn st | grep -E '^.?[MAD]\s+'"
+alias svls="svn ls"
+#alias asvndiff='svn diff --diff-cmd diff --extensions \"-u -p\"'
+
+is_number()
+{
+	case $1 in
+	''|*[!0-9]*) return 1 ;;
+	    *) return 0 ;;
+	esac
+}
+
+s2g_rev()
+{
+    if [ $# -lt 1 ]; then
+		echo "invalid namber of params [$@] please give one valid SVN revision number"
+		return 1
+	fi
+	git svn log --show-commit -r $1 --oneline | awk '{print $3}' 
+}
+
+g2s_rev()
+{
+    if [ $# -lt 1 ]; then
+		echo "invalid namber of params [$@] please give one valid GIT revision number"
+		return 1
+	fi
+    git svn log --show-commit --oneline | grep "$1" | awk '{print $1}' | sed -e s/^r//
+}
+
+gs_diff()
+{
+	if [ $# -lt 2 ]; then
+		echo "invalid namber of params [$@] please give two valid revision numbers"
+		return 1
+	fi
+	
+	if ! is_number "$1" -o ! is_number "$2"; then
+		return 2
+	fi
+
+	git diff $(s2g_rev "$1") $(s2g_rev "$2")
+}
+
+gs_externals() #list all git svn rxternals
+{
+    printf "%s " . kernel/{ce_atm_classifier,ce_atm,ceclass,bp/net/mac80211/{ce_wrs,celeno_cb}}
+    printf "\n"
+}
+
+gs_foreach()
+{
+    COMMAND=${@-pwd}
+	for dir in $(gs_externals); do
+        ([ -d $dir ] && (cd $dir && $COMMAND))
+	done
+	return 0
+}
+
+a2400_svn_up_rev()
+{
+	if ! is_number "$1"; then
+		return 1
+	fi
+	revision="$1"
+
+	for dir in ${PWD}/*/; do 
+		(cd $dir && a2400_svn_up_rev "$revision" && svn up -r $revision);
+	done
+}
+
+ascan()
+{
+	DIR=${1-$PWD}
+	INC_DIR=${2-$PWD}
+	FILES="./.cscope.files"
+	find $DIR -name '*.c'> $FILES
+	find $INC_DIR -name '*.h' >> $FILES
+	cscope -bqk -i $FILES
+#	ctags -L $FILES
+}
+
+
+asr()
+{
+	if [ $# -lt 2 ]; then
+		echo "invalid namber of params [$@] please give old_expression new_expression and where to search(optional)"
+		return 666
+	fi
+	local where=${3-$PWD}
+	agrep -lZ "$1" $where . | xargs -0 -l sed -i "s|$1|$2|g"
+}
+
+puma_load()
+{
+	IP=${IP-10.0.0.77}
+	DEV=${DEV-/dev/ttyUSB0}   
+	
+	echo "tftp get $IP 0x900000 bzImage" | sudo tee $DEV
+	echo "emmc wr_up 0x240000 0x900000 0x400000" | sudo tee $DEV
+	sleep 2
+	echo "tftp get $IP 0x900000 appcpuRootfs.img" | sudo tee $DEV
+	echo "emmc wr_up 0xa40000 0x900000 0x1100000" | sudo tee $DEV
+	sleep 2
+	echo "settings" | sudo tee $DEV
+}
+ablame(){
+if [ $# -ne 2 ] 
+  then
+	echo "Two Parameters required: 1. File (svn) path 2. Pattern for search"
+  else
+	svn blame "$1" | grep -n "$2"
+fi
+}
+
+auth(){
+	if [ $# -eq 0 ]
+	  then
+		echo "No argument supplied"
+	fi
+#make sure only root can run our script
+	if [[ $EUID -ne 0 ]]; then
+		echo "Need to be root"
+	fi
+
+	chmod 777 -R $1 && chown -R developer:users $1
+}
+
+tfc()
+{
+	if [ -z "$1" ]; then
+		echo "No archive filename supplied"
+	fi
+	if [ -z "$2" ]; then
+		echo "No destination Path supplied"
+	fi
+	if [ $# -eq 2 ]; then
+		chown developer:users $1
+		tfx $1 -C $2
+	fi
+}
+
+addsuffix()
+{
+	if [ $# -ne 2 ]; then
+		echo "Two Parameters required: 1. Directory Name 2. Required Suffix"
+	else
+		for filename in "$1"/*; do
+			mv -v "$filename" "${filename}$2";
+		done;
+	fi
+}
+
+svdiff()
+{
+	if [ $# -lt 1 ]; then
+		echo "Two Parameters required: 1. Old revision number 2. New revision number"
+	else
+		if [ $# -eq 1 ]; then
+			svn diff --diff-cmd='meld' -r $1
+		fi
+		if [ $# -eq 2 ]; then
+			svn diff --diff-cmd='meld' -r $1:$2
+		fi
+	fi
+}
+
+a2400_revert()
+{
+	for dir in . kernel/ce_atm_classifier kernel/ce_atm kernel/bp/net/mac80211/ce_wrs kernel/bp/net/mac80211/celeno_cb ; do 
+		(cd $dir && svn up -r $1)
+	done
+}
+
+a2400_hp_create()
+{
+	SDK=${1-/2400sdk}
+    PLATFORM=${2-PUMA6}
+	IFS=":" ; set -- $(svn info | grep "Revision" | sed 's/ //g')
+	REVISION=$2
+	POSTFIX=_revision_${REVISION}_ver_0
+	CELENO_HP_NAME=${REVISION}_${PLATFORM}_HP
+	sudo rm -rvf SOURCE_CODE_celeno_clr_package* && ./make_CL2400_release.sh $PLATFORM
+
+	mkdir -p $CELENO_HP_NAME && tar xfz SOURCE_CODE_celeno_clr_package* --strip-components=1 -C $CELENO_HP_NAME && \
+	mv {,${REVISION}_${PLATFORM}_}SOURCE_CODE_celeno_clr_package*  && \
+	cd $CELENO_HP_NAME
+	IFS='=' && \
+	set -- $(grep "export CONFIG_HOST_CL_VER" src/celeno.mk) && \
+	sed -i "s/export CONFIG_HOST_CL_VER = .*/export CONFIG_HOST_CL_VER = $2$POSTFIX/g" src/celeno.mk
+	sed -i "s|DEF_SDK_PATH =.*|DEF_SDK_PATH = $SDK|g" src/celeno.mk
+#VERS=AAAA ; IFS='='; set -- $(grep CONFIG_HOST_CL_VER src/celeno.mk) ; grep CONFIG_HOST_CL_VER src/celeno.mk | sed "s/export CONFIG_HOST_CL_VER = .*/export CONFIG_HOST_CL_VER = $2_$VERS/g"
+}
+
+a2400_image()
+{
+    [ -L ./build ] && (echo symbolic link && sudo rm ./build) || echo real directory
+	sudo rm ./build/* -rvf
+	sudo make all && ( cd /2400sdk && sudo ./build-atom.sh && \
+	cp -v binaries/IntelCE/bzImage /tftpboot/ && \
+	cp -v binaries/IntelCE/appcpuRootfs.img /tftpboot/ ) && echo FINISHED 
+}
+
+a2400_nfs()
+{
+	DEST=${1-~/work/CL2400/out}
+	sudo rm $DEST/* ./build/* -rvf
+	sudo make all && sudo cp -R ./build/* $DEST/ && sudo chown -R developer:users $DEST && echo FINISHED 
+}
+
+a2400_web()
+{
+	DEST=${1-/2400cgiweb}
+	SRC=${2-./build/PUMA6/project_build_i686/IntelCE/cgiweb-1.0.6/filesystem/www}
+	#sudo rm $DEST/* $SRC/* -rvf
+    #sudo chown -R developer:users $DEST && 
+	sudo make CL2400 && sudo cp -R $SRC/ $DEST/ &&\
+        sudo cp -R ./platformdb/CL2400/filesystem/etc/init.d/httpd_init $DEST/www/ && \
+        sudo cp -R ./platformdb/CL2400/filesystem/bin/ce_air_history.sh $DEST/www/ &&\
+        echo FINISHED 
+}
+
+header_create()
+{
+echo "/*Created on: " $(date +'%d/%m/%Y')*/"
+def __${1^^}_H__
+ine __${1^^}_H__
+
+if /* __${1^^}_H__ */" > $1.h
+}
+export find_exclude='-not -name "*.svn*" -not -name "*.ko" -not -name "*.o" -not -iwholename "*.svn*" -not -iwholename "*.git*"'
+echo Hello, Alex
