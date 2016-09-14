@@ -42,6 +42,29 @@ is_number()
 	esac
 }
 
+aprefix()
+{
+	if [ $# -lt 2 ]; then
+		cat <<-EOF
+		invalid namber of params [$@] please give:
+			1. Prefix
+			2. File to add a prefix to
+		EOF
+		return 1
+	fi
+
+	if [ ! -f ${2} -a ! -d ${2} ]; then
+		echo file does not exist
+		return 2
+	fi
+
+	local dir=$(realpath $(dirname $2))
+	local file_name=$(basename $2)
+	local prefix=$1
+
+	mv ${dir}/{,$prefix}${file_name}
+}
+
 s2g_rev()
 {
     if [ $# -lt 1 ]; then
