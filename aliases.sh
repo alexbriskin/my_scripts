@@ -105,10 +105,52 @@ gs_externals() #list all git svn rxternals
 
 gs_foreach()
 {
-    COMMAND=${@-pwd}
+    COMMAND=${@-echo}
 	for dir in $(gs_externals); do
-        ([ -d $dir ] && (cd $dir && $COMMAND))
+        ([ -d $dir ] && (cd $dir && $COMMAND $dir))
 	done
+	return 0
+}
+
+gs_clone()
+{
+	[ $# -ge '1' -a is_number ${1-NOT_numner} ] && revision=$1 || revision=28755
+	while read -r line; do
+		pushd $directory
+		git svn clone ${url} $name -r$revision || return 2
+		pushd $name
+		git svn fetch && git svn rebase -l
+		popd
+		popd
+	done< <(git svn show-externals | grep -vE '#|^$' | \
+				sed 's/http:/ http:/g ; s/^\///g')
+}
+
+gs_update()
+{
+	while read -r line; do 
+		read directory url name <<< $line
+		pushd ${directory}${name}
+		git svn fetch && git svn rebase -l
+		popd
+	done< <(git svn show-externals | grep -vE '#|^$' | \
+				sed 's/http:/ http:/g ; s/^\///g')
+}
+
+gs_set_excludes()
+{
+	while read -r line; do
+		read directory url name <<< $line
+		local full_dir=${directory}${name}/
+		[ ! -d ./$full_dir ] && return 2
+		if ! grep -q $full_dir ./.git/info/exclude ; then
+			echo Adding $full_dir to exclude
+			echo $full_dir >> ./.git/info/exclude
+		else
+			echo  $full_dir NOT added to excludes
+		fi
+	done< <(git svn show-externals | grep -vE '#|^$' | \
+			sed 's/http:/ http:/g ; s/^\///g')
 	return 0
 }
 

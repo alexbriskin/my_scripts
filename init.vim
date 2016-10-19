@@ -54,6 +54,7 @@ set hlsearch
 set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 set list
 noremap <Leader>i :set list!<CR> " Toggle invisible chars
+noremap <Leader>rc :edit ~/.config/nvim/init.vim<CR> " Toggle invisible chars
 
 " toggle visual numbers
 function! NumberToggle()
@@ -68,7 +69,15 @@ endfunc
 
 nnoremap <leader>nt :call NumberToggle()<CR>
 " let mapleader="\ "
-map <\> <leader>
+map <space> <leader>
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
+
+" jump to rc file
+
+" search visual selection
+vnoremap // y/<C-R>"<CR>
+
+" Terminal mode
+tnoremap <Esc> <C-\><C-n>
