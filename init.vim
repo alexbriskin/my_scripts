@@ -25,7 +25,6 @@ endif
 " Enable syntax
 syntax enable
 filetype plugin on
-" colorscheme desert
 
 " Set path for recursive file searching
 set path+=**
@@ -36,21 +35,14 @@ set autowrite
 " Since ^^^^ I save files constantly F**ck swp files
 set noswapfile
 
-" function! ClipboardYank()
-"   call system('xclip -i -selection clipboard', @@)
-" endfunction
-" function! ClipboardPaste()
-"   let @@ = system('xclip -o -selection clipboard')
-" endfunction
-" vnoremap <silent> y +:call ClipboardYank()<cr>
-
 " Display the current mode
 set showmode
 " Highlight current line
 set cursorline
 " Highlight search terms
 set hlsearch
-" Show Invisible charcters
+
+" Show Invisible characters
 set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 set list
 noremap <Leader>i :set list!<CR> " Toggle invisible chars
@@ -68,16 +60,21 @@ function! NumberToggle()
 endfunc
 
 nnoremap <leader>nt :call NumberToggle()<CR>
-" let mapleader="\ "
+
+" Leader set to SPACE
 map <space> <leader>
+
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
 " jump to rc file
+nnoremap <leader> rc :edit $MYVIMRC
 
 " search visual selection
 vnoremap // y/<C-R>"<CR>
 
 " Terminal mode
 tnoremap <Esc> <C-\><C-n>
+
+inoremap jj <esc>
