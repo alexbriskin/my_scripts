@@ -1,12 +1,13 @@
-" Plugin Setups
+" Plug-in Setups
 call plug#begin('~/.vim/plugged')
-" ------------Pluggins Below ---------
+" ------------Plug-ins Below ---------
 Plug 'https://github.com/tpope/vim-commentary.git'
 Plug 'https://github.com/tpope/vim-surround.git'
 Plug 'https://github.com/scrooloose/syntastic.git'
 Plug 'https://github.com/tpope/vim-fugitive.git'
-" ------------Pluggins Above ---------
+" ------------Plug-ins Above ---------
 call plug#end()
+
 " Basic setups 
 set tabstop=4                   " An indentation every four columns
 set softtabstop=4               " Let backspace delete indent
@@ -24,6 +25,7 @@ endif
 
 " Enable syntax
 syntax enable
+colorscheme elflord
 filetype plugin on
 
 " Set path for recursive file searching
@@ -77,4 +79,5 @@ vnoremap // y/<C-R>"<CR>
 " Terminal mode
 tnoremap <Esc> <C-\><C-n>
 
+" jj to escape insert mode
 inoremap jj <esc>
