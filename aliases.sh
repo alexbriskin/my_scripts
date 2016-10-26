@@ -97,12 +97,6 @@ gs_diff()
 	git diff $(s2g_rev "$1") $(s2g_rev "$2")
 }
 
-gs_externals() #list all git svn rxternals
-{
-    printf "%s " . kernel/{ce_atm_classifier,ce_atm,ceclass,bp/net/mac80211/{ce_wrs,celeno_cb}}
-    printf "\n"
-}
-
 gs_foreach()
 {
     COMMAND=${@-echo}
@@ -116,11 +110,9 @@ gs_clone()
 {
 	[ $# -ge '1' -a is_number ${1-NOT_numner} ] && revision=$1 || revision=28755
 	while read -r line; do
+		read directory url name <<< $line
 		pushd $directory
 		git svn clone ${url} $name -r$revision || return 2
-		pushd $name
-		git svn fetch && git svn rebase -l
-		popd
 		popd
 	done< <(git svn show-externals | grep -vE '#|^$' | \
 				sed 's/http:/ http:/g ; s/^\///g')
