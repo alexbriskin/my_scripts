@@ -18,8 +18,7 @@ alias cd4='cd ../../../../'
 alias arm='rm -rvf'
 alias touchall='find . -exec touch {} \;'
 alias touchold='touch -a -m -t 201001010000.00'
-alias arefresh='source /home/developer/work/myScripts/aliases.sh'
-alias PDF='okular'
+alias arefresh="source $ALIASES"
 
 #aliases for compilation
 alias gc="gcc -std=c89 -pedantic -Wall -Werror"
@@ -108,7 +107,7 @@ gs_foreach()
 
 gs_clone()
 {
-	[ $# -ge '1' -a is_number ${1-NOT_numner} ] && revision=$1 || revision=28755
+	[ $# -ge '1' ] && is_number ${1-NOT_numner} && revision=$1 || revision=28755
 	while read -r line; do
 		read directory url name <<< $line
 		pushd $directory
