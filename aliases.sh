@@ -1,5 +1,5 @@
-
-export ALIASES=$(cd `dirname "${BASH_SOURCE[0]}"` && pwd)/`basename "${BASH_SOURCE[0]}"`
+export ALIASES=$(readlink -f ${BASH_SOURCE[0]})
+export MYSCRIPTS=$(dirname ${ALIASES})
 alias lt='ls -l -t'
 alias asu='sudo su'
 alias tfx='tar xavf'
@@ -62,6 +62,11 @@ aprefix()
 	local prefix=$1
 
 	mv ${dir}/{,$prefix}${file_name}
+}
+
+g_exclude_untracked()
+{
+	while read -r file ; do echo $file >> .git/info/exclude ;done < <(git ls-files --others --exclude-standard)
 }
 
 s2g_rev()
