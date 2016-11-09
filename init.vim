@@ -15,6 +15,7 @@ set shiftwidth=4
 set ignorecase                  " Case insensitive search
 set smartcase                   " Case sensitive when uc present
 set textwidth=80
+set nowrap						" No wrap at the end of the line
 set autoindent                  " Indent at the same level of the previous line
 set ruler                   " Show the ruler
 set showcmd
@@ -81,3 +82,6 @@ tnoremap <Esc> <C-\><C-n>
 
 " jj to escape insert mode
 inoremap jj <esc>
+
+nnoremap Y y$<CR>
+nnoremap <leader>y "+y$<CR>
