@@ -1,5 +1,6 @@
 export ALIASES=$(readlink -f ${BASH_SOURCE[0]})
 export MYSCRIPTS=$(dirname ${ALIASES})
+export NETDIR=/mnt/cernd/sw/AlexBr
 alias lt='ls -l -t'
 alias asu='sudo su'
 alias tfx='tar xavf'
@@ -181,7 +182,7 @@ asr()
 		return 666
 	fi
 	local where=${3-$PWD}
-	agrep -lZ "$1" $where . | xargs -0 -l sed -i "s|$1|$2|g"
+	igrep -lZ "$1" $where . | xargs -0 -l sed -i "s|$1|$2|g"
 }
 
 puma_load()
