@@ -3,7 +3,6 @@ call plug#begin('~/.vim/plugged')
 " ------------Plug-ins Below ---------
 Plug 'https://github.com/tpope/vim-commentary.git'
 Plug 'https://github.com/tpope/vim-surround.git'
-Plug 'https://github.com/scrooloose/syntastic.git'
 Plug 'https://github.com/tpope/vim-fugitive.git'
 " ------------Plug-ins Above ---------
 call plug#end()
@@ -14,11 +13,13 @@ set softtabstop=4               " Let backspace delete indent
 set shiftwidth=4
 set ignorecase                  " Case insensitive search
 set smartcase                   " Case sensitive when uc present
-set textwidth=80
+set textwidth=0
+set wrapmargin=0
 set nowrap						" No wrap at the end of the line
 set autoindent                  " Indent at the same level of the previous line
 set ruler                   " Show the ruler
 set showcmd
+
 if filereadable("cscope.out")
 	cscope add cscope.out
 	set cscopetag				"make cscope as default tag
