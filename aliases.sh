@@ -123,6 +123,51 @@ gs_clone()
 				sed 's/http:/ http:/g ; s/^\///g')
 }
 
+gs_checkout()
+{
+	local revision
+	if [ $# -ge '1' ]; then
+		if is_number ${1-NOT_numner}; then
+			revision=$1
+		else
+			if [ ${1-NOT_master} = "master" ];then
+				revision="master"
+
+			else
+				return 1
+			fi
+		fi
+	else
+		return 1
+	fi
+
+	while read -r line; do
+		read directory url name <<< $line
+		pushd $directory
+
+		if [ $revision = "master" ];then
+			git checkout master
+			popd
+			continue;
+		fi
+
+		while read -r LINE; do
+			read current_revision <<< $LINE;
+			if [ $current_revision -le $revision ];then
+				local git_sha1=$(s2g_rev $current_revision)
+				if git branch | grep -q $git_sha1;then
+					git checkout $git_sha1
+				else
+					git checkout -b $git_sha1 $git_sha1
+				fi
+				break
+			fi
+		done < <(git svn log --show-commit --oneline  | awk '{print $1}' | sed -e s/^r//)
+		popd
+	done< <(git svn show-externals | grep -vE '#|^$' | \
+		sed 's/http:/ http:/g ; s/^\///g')
+}
+
 gs_update()
 {
 	while read -r line; do 
@@ -261,14 +306,14 @@ svdiff()
 
 a2400_revert()
 {
-	for dir in . kernel/ce_atm_classifier kernel/ce_atm kernel/bp/net/mac80211/ce_wrs kernel/bp/net/mac80211/celeno_cb ; do 
+	for dir in . kernel/ce_atm_classifier kernel/ce_atm kernel/bp/net/mac80211/ce_wrs kernel/bp/net/mac80211/celeno_cb ; do
 		(cd $dir && svn up -r $1)
 	done
 }
 
 a2400_hp_create()
 {
-	SDK=${1-/2400sdk}
+	SDK=${1-/puma6_sdk}
     PLATFORM=${2-PUMA6}
 	IFS=":" ; set -- $(svn info | grep "Revision" | sed 's/ //g')
 	REVISION=$2
@@ -289,17 +334,17 @@ a2400_hp_create()
 a2400_image()
 {
     [ -L ./build ] && (echo symbolic link && sudo rm ./build) || echo real directory
-	sudo rm ./build/* -rvf
-	sudo make all && ( cd /2400sdk && sudo ./build-atom.sh && \
+	rm ./build/* -rvf
+	make && pushd /puma6_sdk && ./build-atom.sh && \
 	cp -v binaries/IntelCE/bzImage /tftpboot/ && \
-	cp -v binaries/IntelCE/appcpuRootfs.img /tftpboot/ ) && echo FINISHED 
+	cp -v binaries/IntelCE/appcpuRootfs.img /tftpboot/ && popd && echo FINISHED
 }
 
 a2400_nfs()
 {
-	DEST=${1-~/work/CL2400/out}
-	sudo rm $DEST/* ./build/* -rvf
-	sudo make all && sudo cp -R ./build/* $DEST/ && sudo chown -R developer:users $DEST && echo FINISHED 
+	DEST=${1-~/work/nfs}
+	rm $DEST/* ./build/* -rvf
+	make && cp -R ./build/* $DEST/ && echo FINISHED
 }
 
 a2400_web()
@@ -307,11 +352,11 @@ a2400_web()
 	DEST=${1-/2400cgiweb}
 	SRC=${2-./build/PUMA6/project_build_i686/IntelCE/cgiweb-1.0.6/filesystem/www}
 	#sudo rm $DEST/* $SRC/* -rvf
-    #sudo chown -R developer:users $DEST && 
+	#sudo chown -R developer:users $DEST && 
 	sudo make CL2400 && sudo cp -R $SRC/ $DEST/ &&\
-        sudo cp -R ./platformdb/CL2400/filesystem/etc/init.d/httpd_init $DEST/www/ && \
-        sudo cp -R ./platformdb/CL2400/filesystem/bin/ce_air_history.sh $DEST/www/ &&\
-        echo FINISHED 
+		sudo cp -R ./platformdb/CL2400/filesystem/etc/init.d/httpd_init $DEST/www/ && \
+		sudo cp -R ./platformdb/CL2400/filesystem/bin/ce_air_history.sh $DEST/www/ &&\
+		echo FINISHED 
 }
 
 header_create()
