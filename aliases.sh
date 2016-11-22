@@ -319,7 +319,7 @@ a2400_hp_create()
 	REVISION=$2
 	POSTFIX=_revision_${REVISION}_ver_0
 	CELENO_HP_NAME=${REVISION}_${PLATFORM}_HP
-	sudo rm -rvf SOURCE_CODE_celeno_clr_package* && ./make_CL2400_release.sh $PLATFORM
+	rm -rvf SOURCE_CODE_celeno_clr_package* && ./make_CL2400_release.sh $PLATFORM
 
 	mkdir -p $CELENO_HP_NAME && tar xfz SOURCE_CODE_celeno_clr_package* --strip-components=1 -C $CELENO_HP_NAME && \
 	mv {,${REVISION}_${PLATFORM}_}SOURCE_CODE_celeno_clr_package*  && \
@@ -333,7 +333,7 @@ a2400_hp_create()
 
 a2400_image()
 {
-    [ -L ./build ] && (echo symbolic link && sudo rm ./build) || echo real directory
+    [ -L ./build ] && (echo symbolic link && rm ./build) || echo real directory
 	rm ./build/* -rvf
 	make && pushd /puma6_sdk && ./build-atom.sh && \
 	cp -v binaries/IntelCE/bzImage /tftpboot/ && \

@@ -8,16 +8,16 @@ Plug 'https://github.com/tpope/vim-fugitive.git'
 call plug#end()
 
 " Basic setups 
-set tabstop=4                   " An indentation every four columns
-set softtabstop=4               " Let backspace delete indent
+set tabstop=4					" An indentation every four columns
+set softtabstop=4				" Let backspace delete indent
 set shiftwidth=4
-set ignorecase                  " Case insensitive search
-set smartcase                   " Case sensitive when uc present
+set ignorecase					" Case insensitive search
+set smartcase					" Case sensitive when uc present
 set textwidth=0
 set wrapmargin=0
 set nowrap						" No wrap at the end of the line
-set autoindent                  " Indent at the same level of the previous line
-set ruler                   " Show the ruler
+set autoindent					" Indent at the same level of the previous line
+set ruler						" Show the ruler
 set showcmd
 
 if filereadable("cscope.out")
@@ -72,9 +72,6 @@ if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
-" jump to rc file
-nnoremap <leader> rc :edit $MYVIMRC
-
 " search visual selection
 vnoremap // y/<C-R>"<CR>
 
@@ -85,4 +82,3 @@ tnoremap <Esc> <C-\><C-n>
 inoremap jj <esc>
 
 nnoremap Y y$<CR>
-nnoremap <leader>y "+y$<CR>
