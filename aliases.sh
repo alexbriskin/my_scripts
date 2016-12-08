@@ -243,6 +243,7 @@ puma_load()
 	sleep 2
 	echo "settings" | sudo tee $DEV
 }
+
 ablame(){
 if [ $# -ne 2 ] 
   then
@@ -333,18 +334,20 @@ a2400_hp_create()
 
 a2400_image()
 {
-    [ -L ./build ] && (echo symbolic link && rm ./build) || echo real directory
+	[ -L ./build ] && (echo symbolic link && rm ./build) || echo real directory
 	rm ./build/* -rvf
-	make && pushd /puma6_sdk && ./build-atom.sh && \
-	cp -v binaries/IntelCE/bzImage /tftpboot/ && \
-	cp -v binaries/IntelCE/appcpuRootfs.img /tftpboot/ && popd && echo FINISHED
+	sudo make && sudo chown -R developer:developer . &&\
+		pushd /puma6_sdk && ./build-atom.sh && \
+		cp -v binaries/IntelCE/bzImage /tftpboot/ && \
+		cp -v binaries/IntelCE/appcpuRootfs.img /tftpboot/ && popd && echo FINISHED
 }
 
 a2400_nfs()
 {
 	DEST=${1-~/work/nfs}
 	rm $DEST/* ./build/* -rvf
-	make && cp -R ./build/* $DEST/ && echo FINISHED
+	sudo make && sudo chown -R developer:developer . &&\
+		cp -R ./build/* $DEST/ && echo FINISHED
 }
 
 a2400_web()
@@ -356,7 +359,7 @@ a2400_web()
 	sudo make CL2400 && sudo cp -R $SRC/ $DEST/ &&\
 		sudo cp -R ./platformdb/CL2400/filesystem/etc/init.d/httpd_init $DEST/www/ && \
 		sudo cp -R ./platformdb/CL2400/filesystem/bin/ce_air_history.sh $DEST/www/ &&\
-		echo FINISHED 
+	echo FINISHED
 }
 
 header_create()
