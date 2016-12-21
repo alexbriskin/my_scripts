@@ -34,6 +34,26 @@ alias svst="svn st | grep -E '^.?[MAD]\s+'"
 alias svls="svn ls"
 #alias asvndiff='svn diff --diff-cmd diff --extensions \"-u -p\"'
 
+svlog()
+{
+while read -r line ; do
+	if echo "$line" | grep -q '^[-]\+$'; then
+		read -r head
+		read -r blank
+		read -r subject
+
+		if [ -n "$blank" -o -z "$head" -o -z "$head" ];then
+			return 1
+		fi
+
+		sed 's#\(.*\) | \(.*\) | \([-0-9 :]\{16\}\).* % \(.*\)#\1 \2 (\3) \4#' \
+			<<< "$head % $subject"
+	else
+		continue;
+	fi
+done< <(svn log "$@")
+}
+
 is_number()
 {
 	case $1 in
