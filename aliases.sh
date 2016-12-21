@@ -1,6 +1,6 @@
 export ALIASES=$(readlink -f ${BASH_SOURCE[0]})
 export MYSCRIPTS=$(dirname ${ALIASES})
-export NETDIR=/mnt/cernd/sw/AlexBr
+export NETDIR=/mnt/cernd/_Users/AlexBr
 alias lt='ls -l -t'
 alias asu='sudo su'
 alias tfx='tar xavf'
@@ -336,8 +336,18 @@ a2400_image()
 {
 	[ -L ./build ] && (echo symbolic link && rm ./build) || echo real directory
 	rm ./build/* -rvf
+	FILE=src/celeno.mk
+
+	if [ ! -f ${FILE} ];then
+		echo check celeno.mk location
+		exit 1
+	fi
+
+	str=$(grep   "DEF_SDK_PATH = " src/celeno.mk)
+	SDK=$(echo ${str##*=})
+
 	sudo make && sudo chown -R developer:developer . &&\
-		pushd /puma6_sdk && ./build-atom.sh && \
+		pushd ${SDK} && ./build-atom.sh && \
 		cp -v binaries/IntelCE/bzImage /tftpboot/ && \
 		cp -v binaries/IntelCE/appcpuRootfs.img /tftpboot/ && popd && echo FINISHED
 }
