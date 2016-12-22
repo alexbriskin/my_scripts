@@ -82,3 +82,17 @@ tnoremap <Esc> <C-\><C-n>
 inoremap jj <esc>
 
 nnoremap Y y$<CR>
+
+" Remap some movements to be in cemter of the screen
+nnoremap {{ {{zz
+nnoremap }} }}zz
+nnoremap [[ [[zz
+nnoremap ]] ]]zz
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap # #zz
+nnoremap g* g*zz
+nnoremap g# g#zz
+nnoremap j jzz
+nnoremap k kzz
