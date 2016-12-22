@@ -96,3 +96,5 @@ nnoremap g* g*zz
 nnoremap g# g#zz
 nnoremap j jzz
 nnoremap k kzz
+nnoremap <Leader>[ ?{<CR>:noh<CR>
+nnoremap <Leader>] /}<CR>:noh<CR>
