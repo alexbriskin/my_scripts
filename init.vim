@@ -98,3 +98,5 @@ nnoremap j jzz
 nnoremap k kzz
 nnoremap <Leader>[ ?{<CR>:noh<CR>
 nnoremap <Leader>] /}<CR>:noh<CR>
+nnoremap <C-D> <C-D>zz
+nnoremap <C-U> <C-U>zz
