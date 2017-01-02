@@ -4,6 +4,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'https://github.com/tpope/vim-commentary.git'
 Plug 'https://github.com/tpope/vim-surround.git'
 Plug 'https://github.com/tpope/vim-fugitive.git'
+Plug 'https://github.com/vim-airline/vim-airline.git'
 " ------------Plug-ins Above ---------
 call plug#end()
 
@@ -48,7 +49,6 @@ set hlsearch
 
 " Show Invisible characters
 set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
-set list
 noremap <Leader>i :set list!<CR> " Toggle invisible chars
 noremap <Leader>rc :edit ~/.config/nvim/init.vim<CR> " Toggle invisible chars
 
@@ -100,3 +100,12 @@ nnoremap <Leader>[ ?{<CR>:noh<CR>
 nnoremap <Leader>] /}<CR>:noh<CR>
 nnoremap <C-D> <C-D>zz
 nnoremap <C-U> <C-U>zz
+
+" Vim airline specific configurations
+if !empty(glob("/home/developer/.vim/plugged/vim-airline/"))
+	let g:airline_left_sep = '▶'
+	let g:airline_right_sep = '◀'
+	let g:airline_whitespace_disabled = 1
+	" let g:airline_section_y="%{strlen(&fenc)>0?&fenc:''}%{strlen(&ff)>0?'['.&ff.']':''}%{airline#extensions#whitespace#check()}"
+	let g:airline_section_warning=""
+endif
