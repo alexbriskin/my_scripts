@@ -1,12 +1,19 @@
 " Plug-in Setups
-call plug#begin('~/.vim/plugged')
-" ------------Plug-ins Below ---------
-Plug 'https://github.com/tpope/vim-commentary.git'
-Plug 'https://github.com/tpope/vim-surround.git'
-Plug 'https://github.com/tpope/vim-fugitive.git'
-Plug 'https://github.com/vim-airline/vim-airline.git'
-" ------------Plug-ins Above ---------
-call plug#end()
+if filereadable(glob('~/.vim/autoload/plug.vim'))
+	call plug#begin('~/.vim/plugged')
+	" ------------Plug-ins Below ---------
+	Plug 'https://github.com/tpope/vim-commentary.git'
+	Plug 'https://github.com/tpope/vim-surround.git'
+	Plug 'https://github.com/tpope/vim-fugitive.git'
+	Plug 'https://github.com/vim-airline/vim-airline.git'
+	Plug 'https://github.com/hari-rangarajan/CCTree.git'
+	" ------------Plug-ins Above ---------
+	call plug#end()
+else
+	echo "No vim plug - Please see suggestion below:"
+	echo "\tcurl - fLo ~/.vim/autoload/plug.vim --create-dirs \\"
+	echo "\thttps://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+endif " No vim Plug
 
 " Basic setups 
 set tabstop=4					" An indentation every four columns
@@ -23,6 +30,7 @@ set showcmd
 
 if filereadable("cscope.out")
 	cscope add cscope.out
+	CCTreeLoadDB cscope.out
 	set cscopetag				"make cscope as default tag
 endif
 
