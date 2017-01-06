@@ -102,7 +102,7 @@ nnoremap <C-D> <C-D>zz
 nnoremap <C-U> <C-U>zz
 
 " Vim airline specific configurations
-if !empty(glob("/home/developer/.vim/plugged/vim-airline/"))
+if !empty(glob("~/.vim/plugged/vim-airline/"))
 	let g:airline_left_sep = '▶'
 	let g:airline_right_sep = '◀'
 	let g:airline_whitespace_disabled = 1
