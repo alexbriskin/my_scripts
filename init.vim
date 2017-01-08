@@ -31,9 +31,6 @@ set showcmd
 if filereadable("cscope.out")
 	cscope add cscope.out
 	set cscopetag				"make cscope as default tag
-	if exists ("CCTreeLoadDB")
-		CCTreeLoadDB cscope.out
-	endif
 endif
 
 " Enable syntax
@@ -119,3 +116,11 @@ if !empty(glob("~/.vim/plugged/vim-airline/"))
 	" let g:airline_section_y="%{strlen(&fenc)>0?&fenc:''}%{strlen(&ff)>0?'['.&ff.']':''}%{airline#extensions#whitespace#check()}"
 	let g:airline_section_warning=""
 endif
+
+" Thanks to FDinoff
+" Test CCtree and load DB
+" if !empty(glob("~/.vim/plugged/CCTree/"))
+" 	" filereadable doesn't  bahave well
+" 	autocmd VimEnter * if glob('cscope.out') | 
+" 		\ exec "CCTreeLoadDB 'cscope.out'" | endif
+" endif
