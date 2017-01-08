@@ -30,8 +30,10 @@ set showcmd
 
 if filereadable("cscope.out")
 	cscope add cscope.out
-	CCTreeLoadDB cscope.out
 	set cscopetag				"make cscope as default tag
+	if exists ("CCTreeLoadDB")
+		CCTreeLoadDB cscope.out
+	endif
 endif
 
 " Enable syntax
