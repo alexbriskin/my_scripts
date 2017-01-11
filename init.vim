@@ -28,10 +28,17 @@ set autoindent					" Indent at the same level of the previous line
 set ruler						" Show the ruler
 set showcmd
 
+" Thanks to Damien Conway
+highlight ColorColumn ctermbg=red
+call matchadd('ColorColumn', '\%81v', 100)
+
 if filereadable("cscope.out")
 	cscope add cscope.out
 	set cscopetag				"make cscope as default tag
 endif
+"Code Browsing with cscope
+"Remap CTRL+[ to search symbol under cursor
+nnoremap <C-[> ""yiw:cs f s <C-R>"<CR>
 
 " Enable syntax
 syntax enable
@@ -76,14 +83,15 @@ nnoremap <leader>nt :call NumberToggle()<CR>
 map <space> <leader>
 
 if has("autocmd")
-  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") |
+	\exe "normal! g'\"" | endif
 endif
 
 " search visual selection
 vnoremap // y/<C-R>"<CR>
 
 " Terminal mode
-tnoremap <Esc> <C-\><C-n>
+" tnoremap <Esc> <C-\><C-n>
 
 " jj to escape insert mode
 inoremap jj <esc>
@@ -108,6 +116,14 @@ nnoremap <Leader>] /}<CR>:noh<CR>
 nnoremap <C-D> <C-D>zz
 nnoremap <C-U> <C-U>zz
 
+" remap copy/paste to system buffer 
+vnoremap <Leader>c "+y
+vnoremap <Leader>v "+p
+vnoremap <Leader>V "+P
+nnoremap <Leader>c "+y
+nnoremap <Leader>v "+p
+nnoremap <Leader>V "+P
+
 " Vim airline specific configurations
 if !empty(glob("~/.vim/plugged/vim-airline/"))
 	let g:airline_left_sep = '▶'
@@ -116,6 +132,7 @@ if !empty(glob("~/.vim/plugged/vim-airline/"))
 	" let g:airline_section_y="%{strlen(&fenc)>0?&fenc:''}%{strlen(&ff)>0?'['.&ff.']':''}%{airline#extensions#whitespace#check()}"
 	let g:airline_section_warning=""
 endif
+
 
 " Thanks to FDinoff
 " Test CCtree and load DB
