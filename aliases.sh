@@ -4,7 +4,10 @@ export NETDIR=/mnt/cernd/_Users/AlexBr
 alias lt='ls -l -t'
 alias asu='sudo su'
 alias tfx='tar xavf'
-alias ggrep='grep -Irs --exclude={cscope.out,tags,*.svn*,*.o,*.o.cmd,*.ko,*.vtg,*.vpw,*.vpj,*.vpwhistu,*.tar,*.tar.*,*.siginfo,*.cproject,*cscope.files} --exclude-dir={/.svn/,git-svn} --exclude-dir=".svn"'
+alias ggrep="grep -Irs --exclude={cscope.out,tags,*.svn*,*.o,*.o.cmd,*.ko} \
+	--exclude={*.vtg,*.vpw,*.vpj,*.vpwhistu,*.tar,*.tar.*,*.siginfo} \
+	--exclude={*.cproject,*cscope.files,*.js,*.html} \
+	--exclude-dir={/.svn/,git-svn,.svn}"
 alias ngrep='ggrep -n'
 alias igrep='ngrep -i'
 alias slick='~developer/slickedit/bin/vs'
