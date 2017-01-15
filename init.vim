@@ -38,7 +38,7 @@ if filereadable("cscope.out")
 endif
 "Code Browsing with cscope
 "Remap CTRL+[ to search symbol under cursor
-nnoremap <C-[> ""yiw:cs f s <C-R>"<CR>
+nnoremap <Leader>[ "9yiw:cscope find s <C-R>9<CR>
 
 " Enable syntax
 syntax enable
@@ -111,8 +111,6 @@ nnoremap g* g*zz
 nnoremap g# g#zz
 nnoremap j jzz
 nnoremap k kzz
-nnoremap <Leader>[ ?{<CR>:noh<CR>
-nnoremap <Leader>] /}<CR>:noh<CR>
 nnoremap <C-D> <C-D>zz
 nnoremap <C-U> <C-U>zz
 
