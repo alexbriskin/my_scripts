@@ -27,6 +27,11 @@ set nowrap						" No wrap at the end of the line
 set autoindent					" Indent at the same level of the previous line
 set ruler						" Show the ruler
 set showcmd
+set backspace=indent,eol,start
+
+" vim-airline support
+set t_Co=4096
+set laststatus=2
 
 " Thanks to Damien Conway
 highlight ColorColumn ctermbg=red
@@ -37,8 +42,8 @@ if filereadable("cscope.out")
 	set cscopetag				"make cscope as default tag
 endif
 "Code Browsing with cscope
-"Remap CTRL+[ to search symbol under cursor
-nnoremap <Leader>[ "9yiw:cscope find s <C-R>9<CR>
+"Remap Leader+] to search symbol under cursor
+nnoremap <Leader>] "9yiw:cscope find s <C-R>9<CR>
 
 " Enable syntax
 syntax enable

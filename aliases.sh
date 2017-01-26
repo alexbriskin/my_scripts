@@ -397,11 +397,34 @@ a2400_web()
 
 header_create()
 {
-echo "/*Created on: " $(date +'%d/%m/%Y')*/"
-def __${1^^}_H__
-ine __${1^^}_H__
+	cat <<-EOF>> $1.h
+	/*Created on: " $(date +'%d/%m/%Y')"
+		Author: Alex
+		Reviewed by:
+		Rejects:
+	*/
+	#ifndef __${1^^}_H__
+	#define __${1^^}_H__
 
-if /* __${1^^}_H__ */" > $1.h
+	#endif /* __${1^^}_H__ */
+	EOF
 }
+
 export find_exclude='-not -name "*.svn*" -not -name "*.ko" -not -name "*.o" -not -iwholename "*.svn*" -not -iwholename "*.git*"'
+ctest_file()
+{
+	cat <<-EOF>> $1
+	/*Created on: " $(date +'%d/%m/%Y')"
+		Author: Alex
+		Reviewed by:
+		Rejects:
+	*/
+	#include <stdio.h>
+
+	int main( int argc , char ** argv, char ** env)
+	{
+			return 0;
+	}
+	EOF
+}
 echo Hello, Alex
