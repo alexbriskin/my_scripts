@@ -11,7 +11,7 @@ if filereadable(glob('~/.vim/autoload/plug.vim'))
 	call plug#end()
 else
 	echo "No vim plug - Please see suggestion below:"
-	echo "\tcurl - fLo ~/.vim/autoload/plug.vim --create-dirs \\"
+	echo "\tcurl -fLo ~/.vim/autoload/plug.vim --create-dirs \\"
 	echo "\thttps://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
 endif " No vim Plug
 
