@@ -236,8 +236,8 @@ ascan()
 	DIR=${1-$PWD}
 	INC_DIR=${2-$PWD}
 	FILES="./.cscope.files"
-	find $DIR -name '*.c'> $FILES
-	find $INC_DIR -name '*.h' >> $FILES
+	find $DIR -type f -name '*.c'> $FILES
+	find $INC_DIR -type f -name '*.h' >> $FILES
 	cscope -bqk -i $FILES
 #	ctags -L $FILES
 }
