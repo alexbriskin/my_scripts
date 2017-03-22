@@ -128,6 +128,9 @@ nnoremap <Leader>c "+y
 nnoremap <Leader>v "+p
 nnoremap <Leader>V "+P
 
+" delete blocks
+nnoremap <Leader>d d%
+
 " Vim airline specific configurations
 if !empty(glob("~/.vim/plugged/vim-airline/"))
 	let g:airline_left_sep = '▶'
