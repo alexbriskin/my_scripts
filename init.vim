@@ -35,7 +35,7 @@ set laststatus=2
 
 " Thanks to Damien Conway
 highlight ColorColumn ctermbg=red
-call matchadd('ColorColumn', '\%81v', 100)
+call matchadd('ColorColumn', '\%80v', 100)
 
 if filereadable("cscope.out")
 	cscope add cscope.out
@@ -88,6 +88,7 @@ nnoremap <leader>nt :call NumberToggle()<CR>
 map <space> <leader>
 
 if has("autocmd")
+  autocmd FileType c setlocal sw=2 cino=(0,:N0,t0 ts=4
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") |
 	\exe "normal! g'\"" | endif
 endif
@@ -136,6 +137,11 @@ if !empty(glob("~/.vim/plugged/vim-airline/"))
 	let g:airline_section_warning=""
 endif
 
+" command mode arrows
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+cnoremap <C-b> <Left>
+cnoremap <C-f> <Right>
 
 " Thanks to FDinoff
 " Test CCtree and load DB
