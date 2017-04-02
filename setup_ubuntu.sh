@@ -9,7 +9,7 @@ sudo apt install -y dkms virtualbox-guest-dkms git vim  curl cscope thunar \
 	minicom mate-terminal xclip realpath cmake doxygen u-boot-tools atftp\
 	ssh g++ make mercurial pandoc openjdk-9-jre-headless smitools meld atftpd\
 	kdiff3 cscope patch libmpc3 ksh libsdl1.2-dev openssh-server telnetd \
-	xinetd  libgtk2.0-0:i386 libxtst6:i386 wget dfu-util
+	xinetd  libgtk2.0-0:i386 libxtst6:i386 wget dfu-util emacs wireshark
 
 
 sudo touch /var/log/atftpd.log
@@ -19,3 +19,4 @@ USE_INETD=false
 OPTIONS="--tftpd-timeout 300 --retry-timeout 5 --mcast-port 1758 --mcast-addr 239.239.239.0-255 --mcast-ttl 1 --maxthread 100 --verbose=5 /tftpboot --logfile /var/log/atftpd.log"
 EOF
 
+git config --global core.editor "vim"
