@@ -10,7 +10,7 @@ sudo apt install -y dkms virtualbox-guest-dkms git vim  curl cscope thunar \
 	ssh g++ make mercurial pandoc openjdk-9-jre-headless smitools meld atftpd\
 	kdiff3 cscope patch libmpc3 ksh libsdl1.2-dev openssh-server telnetd \
 	xinetd  libgtk2.0-0:i386 libxtst6:i386 wget dfu-util emacs wireshark \
-	sshfs
+	sshfs repo
 
 
 sudo touch /var/log/atftpd.log
