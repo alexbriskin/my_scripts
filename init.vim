@@ -7,6 +7,7 @@ if filereadable(glob('~/.vim/autoload/plug.vim'))
 	Plug 'https://github.com/tpope/vim-fugitive.git'
 	Plug 'https://github.com/vim-airline/vim-airline.git'
 	Plug 'https://github.com/hari-rangarajan/CCTree.git'
+	Plug 'https://github.com/vim-utils/vim-man.git'
 	" ------------Plug-ins Above ---------
 	call plug#end()
 else
@@ -15,7 +16,7 @@ else
 	echo "\thttps://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
 endif " No vim Plug
 
-" Basic setups 
+" Basic setups
 set tabstop=4					" An indentation every four columns
 set softtabstop=4				" Let backspace delete indent
 set shiftwidth=4
@@ -120,7 +121,7 @@ nnoremap k kzz
 nnoremap <C-D> <C-D>zz
 nnoremap <C-U> <C-U>zz
 
-" remap copy/paste to system buffer 
+" remap copy/paste to system buffer
 vnoremap <Leader>c "+y
 vnoremap <Leader>v "+p
 vnoremap <Leader>V "+P
@@ -140,6 +141,11 @@ if !empty(glob("~/.vim/plugged/vim-airline/"))
 	let g:airline_section_warning=""
 endif
 
+" Vim man mapping(s)
+if !empty(glob("~/.vim/plugged/vim-man/"))
+	nnoremap <Leader>m yiw:Man <C-R>" <CR>
+endif
+
 " command mode arrows
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
@@ -150,6 +156,6 @@ cnoremap <C-f> <Right>
 " Test CCtree and load DB
 " if !empty(glob("~/.vim/plugged/CCTree/"))
 " 	" filereadable doesn't  bahave well
-" 	autocmd VimEnter * if glob('cscope.out') | 
+" 	autocmd VimEnter * if glob('cscope.out') |
 " 		\ exec "CCTreeLoadDB 'cscope.out'" | endif
 " endif
