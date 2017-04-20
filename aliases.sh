@@ -397,7 +397,11 @@ a2400_web()
 
 header_create()
 {
-	cat <<-EOF>> $1.h
+	[ $# -eq 2 -a -d $2 ] && \
+		path="${2}/" || \
+		path=""
+
+	cat <<-EOF>> ${path}$1.h
 	/*Created on: " $(date +'%d/%m/%Y')"
 		Author: Alex
 		Reviewed by:
