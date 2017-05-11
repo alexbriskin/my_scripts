@@ -8,6 +8,8 @@ if filereadable(glob('~/.vim/autoload/plug.vim'))
 	Plug 'https://github.com/vim-airline/vim-airline.git'
 	Plug 'https://github.com/hari-rangarajan/CCTree.git'
 	Plug 'https://github.com/vim-utils/vim-man.git'
+	Plug 'https://github.com/ronakg/quickr-cscope.vim.git'
+	Plug 'https://github.com/stefandtw/quickfix-reflector.vim.git'
 	" ------------Plug-ins Above ---------
 	call plug#end()
 else
@@ -29,6 +31,7 @@ set autoindent					" Indent at the same level of the previous line
 set ruler						" Show the ruler
 set showcmd
 set backspace=indent,eol,start
+set splitright
 
 " vim-airline support
 set t_Co=4096
@@ -45,6 +48,7 @@ endif
 "Code Browsing with cscope
 "Remap Leader+] to search symbol under cursor
 nnoremap <Leader>] "9yiw:cscope find s <C-R>9<CR>
+" nnoremap <Leader>] :vert cs find s <C-R>=expand("<cword>")<CR><CR>
 
 " Enable syntax
 syntax enable
@@ -89,7 +93,7 @@ nnoremap <leader>nt :call NumberToggle()<CR>
 map <space> <leader>
 
 if has("autocmd")
-  autocmd FileType c setlocal sw=2 cino=(0,:N0,t0 ts=4
+  autocmd FileType c setlocal expandtab sw=2 cino=(0,:N0,t0 ts=4
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") |
 	\exe "normal! g'\"" | endif
 endif
