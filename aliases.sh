@@ -432,4 +432,10 @@ ctest_file()
 	}
 	EOF
 }
+
+chdir()
+{
+	[ $# -eq 1 ] && mkdir -p ${1} && pushd ${1}
+}
+
 echo Hello, Alex
