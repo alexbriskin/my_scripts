@@ -45,10 +45,6 @@ if filereadable("cscope.out")
 	cscope add cscope.out
 	set cscopetag				"make cscope as default tag
 endif
-"Code Browsing with cscope
-"Remap Leader+] to search symbol under cursor
-nnoremap <Leader>] "9yiw:cscope find s <C-R>9<CR>
-" nnoremap <Leader>] :vert cs find s <C-R>=expand("<cword>")<CR><CR>
 
 " Enable syntax
 syntax enable
@@ -73,7 +69,7 @@ set hlsearch
 
 " Show Invisible characters
 set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
-noremap <Leader>i :set list!<CR> " Toggle invisible chars
+noremap <Leader>l :set list!<CR> " Toggle invisible chars
 noremap <Leader>rc :edit ~/.config/nvim/init.vim<CR> " Toggle invisible chars
 
 " toggle visual numbers
@@ -93,7 +89,7 @@ nnoremap <leader>nt :call NumberToggle()<CR>
 map <space> <leader>
 
 if has("autocmd")
-  autocmd FileType c setlocal expandtab sw=2 cino=(0,:N0,t0 ts=4
+  autocmd FileType c,cpp setlocal expandtab sw=2 cino=(0,:N0,t0 ts=4
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") |
 	\exe "normal! g'\"" | endif
 endif
