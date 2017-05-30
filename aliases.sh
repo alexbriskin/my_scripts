@@ -7,7 +7,7 @@ alias tfx='tar xavf'
 alias ggrep="grep -Irs --exclude={cscope.out,tags,*.svn*,*.o,*.o.cmd,*.ko} \
 	--exclude={*.vtg,*.vpw,*.vpj,*.vpwhistu,*.tar,*.tar.*,*.siginfo} \
 	--exclude={*.cproject,*cscope.files,*.js,*.html,*.svg,*.git,*.d} \
-	--exclude-dir={/.svn/,git-svn,.svn,.git,} \
+	--exclude-dir={/.svn/,git-svn,.svn,.git} \
 	--exclude={*.objdump,*.dis,*.map}"
 alias ngrep='ggrep -n'
 alias igrep='ngrep -i'
