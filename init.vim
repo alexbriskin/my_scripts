@@ -1,20 +1,26 @@
 " Plug-in Setups
-if filereadable(glob('~/.vim/autoload/plug.vim'))
-	call plug#begin('~/.vim/plugged')
+if filereadable(glob('~/.config/nvim/autoload/plug.vim'))
+	call plug#begin('~/.config/nvim/plugged')
 	" ------------Plug-ins Below ---------
 	Plug 'https://github.com/tpope/vim-commentary.git'
 	Plug 'https://github.com/tpope/vim-surround.git'
 	Plug 'https://github.com/tpope/vim-fugitive.git'
 	Plug 'https://github.com/vim-airline/vim-airline.git'
 	Plug 'https://github.com/hari-rangarajan/CCTree.git'
+	Plug 'https://github.com/Shougo/deoplete.nvim.git'
+	Plug 'https://github.com/zchee/deoplete-clang.git'
+	Plug 'https://github.com/zchee/deoplete-jedi.git'
+	Plug 'https://github.com/airodactyl/neovim-ranger.git'
+	Plug 'https://github.com/critiqjo/lldb.nvim.git'
 	Plug 'https://github.com/vim-utils/vim-man.git'
+	Plug 'https://github.com/neomake/neomake.git'
 	Plug 'https://github.com/ronakg/quickr-cscope.vim.git'
 	Plug 'https://github.com/stefandtw/quickfix-reflector.vim.git'
 	" ------------Plug-ins Above ---------
 	call plug#end()
 else
 	echo "No vim plug - Please see suggestion below:"
-	echo "\tcurl -fLo ~/.vim/autoload/plug.vim --create-dirs \\"
+	echo "\tcurl -fLo ~/.config/autoload/plug.vim --create-dirs \\"
 	echo "\thttps://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
 endif " No vim Plug
 
