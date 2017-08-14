@@ -16,6 +16,7 @@ if filereadable(glob('~/.config/nvim/autoload/plug.vim'))
 	Plug 'https://github.com/neomake/neomake.git'
 	Plug 'https://github.com/ronakg/quickr-cscope.vim.git'
 	Plug 'https://github.com/stefandtw/quickfix-reflector.vim.git'
+	Plug 'https://github.com/w0rp/ale.git'
 	" ------------Plug-ins Above ---------
 	call plug#end()
 else

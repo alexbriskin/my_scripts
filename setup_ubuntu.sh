@@ -21,3 +21,9 @@ OPTIONS="--tftpd-timeout 300 --retry-timeout 5 --mcast-port 1758 --mcast-addr 23
 EOF
 
 git config --global core.editor "vim"
+apt install -y clang clang-tidy cppcheck flawfinder pylint pylint3 flake8 pep8 pychecker shellcheck
+apt install -y cmakelint
+wget https://www.scootersoftware.com/bcompare-4.2.2.22384_amd64.deb
+sudo apt-get update
+sudo apt-get install gdebi-core
+sudo gdebi bcompare-4.2.2.22384_amd64.deb
