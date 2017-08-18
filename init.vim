@@ -17,11 +17,12 @@ if filereadable(glob('~/.config/nvim/autoload/plug.vim'))
 	Plug 'https://github.com/ronakg/quickr-cscope.vim.git'
 	Plug 'https://github.com/stefandtw/quickfix-reflector.vim.git'
 	Plug 'https://github.com/w0rp/ale.git'
+	Plug 'https://github.com/vivien/vim-linux-coding-style.git'
 	" ------------Plug-ins Above ---------
 	call plug#end()
 else
 	echo "No vim plug - Please see suggestion below:"
-	echo "\tcurl -fLo ~/.config/autoload/plug.vim --create-dirs \\"
+	echo "\tcurl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \\"
 	echo "\thttps://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
 endif " No vim Plug
 
