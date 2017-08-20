@@ -3,18 +3,17 @@
 sudo dpkg --add-architecture i386
 sudo add-apt-repository -y ppa:neovim-ppa/stable
 sudo apt-get update
-
-sudo apt install -y dkms virtualbox-guest-dkms git vim  curl cscope thunar \
-	minicom mate-terminal xclip realpath cmake doxygen u-boot-tools atftp\
-	ssh g++ make mercurial pandoc openjdk-9-jre-headless smitools meld atftpd\
-	kdiff3 cscope patch libmpc3 ksh libsdl1.2-dev openssh-server telnetd \
-	xinetd  libgtk2.0-0:i386 libxtst6:i386 wget dfu-util emacs wireshark \
-	sshfs repo tree autofs clang clang-tidy cppcheck flawfinder pylint \
-	pylint3 cmakelint flake8 pep8 pychecker shellcheck libc6:i386 lib32z1 \
-	libncurses5:i386 libstdc++6:i386 gdebi-core qemu python neovim \
-	python-dev python-pip python3-dev python3-pip gem libffi-dev libssl-dev \
-	libxml2-dev libxslt1-dev libjpeg8-dev zlib1g-dev ruby-dev python2.7-dev
-
+sudo apt install -y dkms virtualbox-guest-dkms git vim curl cscope \
+	thunar minicom mate-terminal xclip realpath cmake doxygen \
+	u-boot-tools atftp ssh g++ make mercurial pandoc \
+	openjdk-9-jre-headless smitools meld atftpd ssh g++ make mercurial \
+	pandoc openjdk-9-jre-headless smitools meld atftpd xinetd \
+	libgtk2.0-0:i386 libxtst6:i386 wget dfu-util emacs wireshark sshfs \
+	repo tree autofs clang clang-tidy cppcheck flawfinder pylint pylint3 \
+	flake8 pep8 pychecker shellcheck libc6:i386 lib32z1 libncurses5:i386 \
+	libstdc++6:i386 gdebi-core qemu python neovim python-dev python-pip \
+	python3-dev python3-pip gem libffi-dev libssl-dev libxml2-dev \
+	libxslt1-dev libjpeg8-dev zlib1g-dev ruby-dev python2.7-dev
 
 sudo touch /var/log/atftpd.log
 sudo chmod 644 /var/log/atftpd.log
