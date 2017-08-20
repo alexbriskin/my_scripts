@@ -1,16 +1,19 @@
 #!/bin/bash -eu
 
 sudo dpkg --add-architecture i386
+sudo add-apt-repository -y ppa:neovim-ppa/stable
 sudo apt-get update
-
-sudo apt install -y libc6:i386 lib32z1 libncurses5:i386 libstdc++6:i386
 
 sudo apt install -y dkms virtualbox-guest-dkms git vim  curl cscope thunar \
 	minicom mate-terminal xclip realpath cmake doxygen u-boot-tools atftp\
 	ssh g++ make mercurial pandoc openjdk-9-jre-headless smitools meld atftpd\
 	kdiff3 cscope patch libmpc3 ksh libsdl1.2-dev openssh-server telnetd \
 	xinetd  libgtk2.0-0:i386 libxtst6:i386 wget dfu-util emacs wireshark \
-	sshfs repo tree autofs
+	sshfs repo tree autofs clang clang-tidy cppcheck flawfinder pylint \
+	pylint3 cmakelint flake8 pep8 pychecker shellcheck libc6:i386 lib32z1 \
+	libncurses5:i386 libstdc++6:i386 gdebi-core qemu python neovim \
+	python-dev python-pip python3-dev python3-pip gem libffi-dev libssl-dev \
+	libxml2-dev libxslt1-dev libjpeg8-dev zlib1g-dev ruby-dev python2.7-dev
 
 
 sudo touch /var/log/atftpd.log
@@ -21,10 +24,17 @@ OPTIONS="--tftpd-timeout 300 --retry-timeout 5 --mcast-port 1758 --mcast-addr 23
 EOF
 
 git config --global core.editor "vim"
-apt install -y clang clang-tidy cppcheck flawfinder pylint pylint3 flake8 pep8 pychecker shellcheck
-apt install -y cmakelint
 wget https://www.scootersoftware.com/bcompare-4.2.2.22384_amd64.deb
-sudo apt-get update
-sudo apt-get install gdebi-core
 sudo gdebi bcompare-4.2.2.22384_amd64.deb
-apt-get -y install qemu
+
+sudo update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60
+sudo update-alternatives --config vi
+sudo update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60
+sudo update-alternatives --config vim
+sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 60
+sudo update-alternatives --config editor
+sudo pip install mitmproxy
+sudo pip install neovim
+sudo pip3 install neovim
+sudo gem install neovim
+curl -fLo /root/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
