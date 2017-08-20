@@ -13,7 +13,6 @@ if filereadable(glob('~/.config/nvim/autoload/plug.vim'))
 	Plug 'https://github.com/airodactyl/neovim-ranger.git'
 	Plug 'https://github.com/critiqjo/lldb.nvim.git'
 	Plug 'https://github.com/vim-utils/vim-man.git'
-	Plug 'https://github.com/neomake/neomake.git'
 	Plug 'https://github.com/ronakg/quickr-cscope.vim.git'
 	Plug 'https://github.com/stefandtw/quickfix-reflector.vim.git'
 	Plug 'https://github.com/w0rp/ale.git'
