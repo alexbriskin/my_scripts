@@ -154,7 +154,6 @@ if !empty(glob("~/.config/nvim/plugged/vim-man/"))
 endif
 
 if !empty(glob("~/.config/nvim/plugged/ale/"))
-	" Write this in your vimrc file
 	let g:ale_set_loclist = 0
 	let g:ale_set_quickfix = 1
 	" Enable completion where available.
