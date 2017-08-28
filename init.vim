@@ -77,7 +77,7 @@ set hlsearch
 " Show Invisible characters
 set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 noremap <Leader>l :set list!<CR> " Toggle invisible chars
-noremap <Leader>rc :edit ~/.config/nvim/init.vim<CR> " Toggle invisible chars
+nremap <Leader>rc :edit ~/.config/nvim/init.vim<CR> " Toggle invisible chars
 
 " toggle visual numbers
 function! NumberToggle()
@@ -140,7 +140,7 @@ nnoremap <Leader>V "+P
 nnoremap <Leader>d d%
 
 " Vim airline specific configurations
-if !empty(glob("~/.vim/plugged/vim-airline/"))
+if !empty(glob("~/.config/nvim/plugged/vim-airline/"))
 	let g:airline_left_sep = '▶'
 	let g:airline_right_sep = '◀'
 	let g:airline_whitespace_disabled = 1
@@ -149,8 +149,16 @@ if !empty(glob("~/.vim/plugged/vim-airline/"))
 endif
 
 " Vim man mapping(s)
-if !empty(glob("~/.vim/plugged/vim-man/"))
-	nnoremap <Leader>m yiw:Man <C-R>" <CR>
+if !empty(glob("~/.config/nvim/plugged/vim-man/"))
+   nnoremap <Leader>m :Man 2 <C-R><C-W> <CR>
+endif
+
+if !empty(glob("~/.config/nvim/plugged/ale/"))
+	" Write this in your vimrc file
+	let g:ale_set_loclist = 0
+	let g:ale_set_quickfix = 1
+	" Enable completion where available.
+	let g:ale_completion_enabled = 1
 endif
 
 " command mode arrows
@@ -159,10 +167,3 @@ cnoremap <C-n> <Down>
 cnoremap <C-b> <Left>
 cnoremap <C-f> <Right>
 
-" Thanks to FDinoff
-" Test CCtree and load DB
-" if !empty(glob("~/.vim/plugged/CCTree/"))
-" 	" filereadable doesn't  bahave well
-" 	autocmd VimEnter * if glob('cscope.out') |
-" 		\ exec "CCTreeLoadDB 'cscope.out'" | endif
-" endif
