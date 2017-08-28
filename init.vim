@@ -77,7 +77,7 @@ set hlsearch
 " Show Invisible characters
 set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 noremap <Leader>l :set list!<CR> " Toggle invisible chars
-nremap <Leader>rc :edit ~/.config/nvim/init.vim<CR> " Toggle invisible chars
+noremap <Leader>rc :edit ~/.config/nvim/init.vim<CR> " Toggle invisible chars
 
 " toggle visual numbers
 function! NumberToggle()
