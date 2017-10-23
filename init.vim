@@ -7,16 +7,12 @@ if filereadable(glob('~/.config/nvim/autoload/plug.vim'))
 	Plug 'https://github.com/tpope/vim-fugitive.git'
 	Plug 'https://github.com/vim-airline/vim-airline.git'
 	Plug 'https://github.com/hari-rangarajan/CCTree.git'
-	Plug 'https://github.com/Shougo/deoplete.nvim.git'
-	Plug 'https://github.com/zchee/deoplete-clang.git'
-	Plug 'https://github.com/zchee/deoplete-jedi.git'
-	Plug 'https://github.com/airodactyl/neovim-ranger.git'
-	Plug 'https://github.com/critiqjo/lldb.nvim.git'
 	Plug 'https://github.com/vim-utils/vim-man.git'
 	Plug 'https://github.com/ronakg/quickr-cscope.vim.git'
 	Plug 'https://github.com/stefandtw/quickfix-reflector.vim.git'
-	Plug 'https://github.com/w0rp/ale.git'
 	Plug 'https://github.com/vivien/vim-linux-coding-style.git'
+	Plug 'https://github.com/vim-syntastic/syntastic.git'
+	Plug 'https://github.com/davidhalter/jedi-vim.git'
 	" ------------Plug-ins Above ---------
 	call plug#end()
 else
@@ -160,9 +156,19 @@ if !empty(glob("~/.config/nvim/plugged/ale/"))
 	let g:ale_completion_enabled = 1
 endif
 
+if !empty(glob("~/.config/nvim/plugged/syntastic/"))
+	let g:syntastic_always_populate_loc_list = 1
+	let g:syntastic_auto_loc_list = 2
+	let g:syntastic_check_on_open = 1
+	let g:syntastic_check_on_wq = 0
+	let g:syntastic_python_checkers = ['flake8']
+	let g:syntastic_c_checkers = ['flawfinder', 'gcc', 'splint']
+endif
+
 " command mode arrows
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 cnoremap <C-b> <Left>
 cnoremap <C-f> <Right>
 
+au BufRead,BufNewFile *.h set filetype=c
