@@ -10,7 +10,7 @@ if filereadable(glob('~/.config/nvim/autoload/plug.vim'))
 	Plug 'https://github.com/vim-utils/vim-man.git'
 	Plug 'https://github.com/ronakg/quickr-cscope.vim.git'
 	Plug 'https://github.com/stefandtw/quickfix-reflector.vim.git'
-	Plug 'https://github.com/vivien/vim-linux-coding-style.git'
+	Plug 'https://github.com/Valloric/YouCompleteMe.git'
 	Plug 'https://github.com/vim-syntastic/syntastic.git'
 	Plug 'https://github.com/davidhalter/jedi-vim.git'
 	" ------------Plug-ins Above ---------
