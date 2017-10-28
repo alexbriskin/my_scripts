@@ -11,8 +11,7 @@ if filereadable(glob('~/.config/nvim/autoload/plug.vim'))
 	Plug 'https://github.com/ronakg/quickr-cscope.vim.git'
 	Plug 'https://github.com/stefandtw/quickfix-reflector.vim.git'
 	Plug 'https://github.com/Valloric/YouCompleteMe.git'
-	Plug 'https://github.com/vim-syntastic/syntastic.git'
-	Plug 'https://github.com/davidhalter/jedi-vim.git'
+	Plug 'https://github.com/w0rp/ale.git'
 	" ------------Plug-ins Above ---------
 	call plug#end()
 else
@@ -150,19 +149,13 @@ if !empty(glob("~/.config/nvim/plugged/vim-man/"))
 endif
 
 if !empty(glob("~/.config/nvim/plugged/ale/"))
-	let g:ale_set_loclist = 0
-	let g:ale_set_quickfix = 1
-	" Enable completion where available.
-	let g:ale_completion_enabled = 1
-endif
-
-if !empty(glob("~/.config/nvim/plugged/syntastic/"))
-	let g:syntastic_always_populate_loc_list = 1
-	let g:syntastic_auto_loc_list = 2
-	let g:syntastic_check_on_open = 1
-	let g:syntastic_check_on_wq = 0
-	let g:syntastic_python_checkers = ['flake8']
-	let g:syntastic_c_checkers = ['flawfinder', 'gcc', 'splint']
+	let g:ale_set_loclist = 1
+	let g:ale_set_quickfix = 0
+	let g:ale_echo_msg_error_str = 'E'
+	let g:ale_echo_msg_warning_str = 'W'
+	let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+	nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+	nmap <silent> <C-j> <Plug>(ale_next_wrap)
 endif
 
 " command mode arrows
