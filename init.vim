@@ -7,7 +7,6 @@ if filereadable(glob('~/.config/nvim/autoload/plug.vim'))
 	Plug 'https://github.com/tpope/vim-fugitive.git'
 	Plug 'https://github.com/vim-airline/vim-airline.git'
 	Plug 'https://github.com/hari-rangarajan/CCTree.git'
-	Plug 'https://github.com/vim-utils/vim-man.git'
 	Plug 'https://github.com/ronakg/quickr-cscope.vim.git'
 	Plug 'https://github.com/stefandtw/quickfix-reflector.vim.git'
 	Plug 'https://github.com/Valloric/YouCompleteMe.git'
@@ -143,10 +142,6 @@ if !empty(glob("~/.config/nvim/plugged/vim-airline/"))
 	let g:airline_section_warning=""
 endif
 
-" Vim man mapping(s)
-if !empty(glob("~/.config/nvim/plugged/vim-man/"))
-   nnoremap <Leader>m :Man 2 <C-R><C-W> <CR>
-endif
 
 if !empty(glob("~/.config/nvim/plugged/ale/"))
 	let g:ale_set_loclist = 1
@@ -156,6 +151,7 @@ if !empty(glob("~/.config/nvim/plugged/ale/"))
 	let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 	nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 	nmap <silent> <C-j> <Plug>(ale_next_wrap)
+	let g:ale_linters = {'c': 'all'}
 endif
 
 " command mode arrows
@@ -165,3 +161,9 @@ cnoremap <C-b> <Left>
 cnoremap <C-f> <Right>
 
 au BufRead,BufNewFile *.h set filetype=c
+
+if has('nvim')
+	nnoremap <Leader>m :Man 2 <C-R><C-W> <CR>
+	let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
+	tnoremap <Esc> <C-\><C-n>
+endif

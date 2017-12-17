@@ -1,0 +1,23 @@
+[user]
+	name = Alex Briskin
+	email = alex.briskin@auto-talks.com
+[core]
+	editor = vi
+[merge]
+	tool = meld
+[alias]
+	lol = log --graph --decorate --pretty=oneline --abbrev-commit
+	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+	oneline = log  --pretty=format:'%Cred%h%C(blue) <%><(15,trunc)%an> %C(yellow)%s'
+	diffmeld = difftool -d --tool=meld
+	mergemeld = mergetool -d --tool=meld
+	co = checkout
+	b = branch
+[diff]
+	tool = meld
+[mergetool "bc"]
+	trustExitCode = true
+[push]
+	default = matching
+[color]
+	ui = auto
