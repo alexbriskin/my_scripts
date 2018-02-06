@@ -439,3 +439,7 @@ chdir()
 }
 
 echo Hello, Alex
+pyscope()
+{
+  find . -name '*.py' > cscope.files && cscope -Rb
+}

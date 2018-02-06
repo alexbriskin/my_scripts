@@ -11,6 +11,7 @@ if filereadable(glob('~/.config/nvim/autoload/plug.vim'))
 	Plug 'https://github.com/stefandtw/quickfix-reflector.vim.git'
 	Plug 'https://github.com/Valloric/YouCompleteMe.git'
 	Plug 'https://github.com/w0rp/ale.git'
+	Plug 'https://github.com/majutsushi/tagbar.git'
 	" ------------Plug-ins Above ---------
 	call plug#end()
 else
@@ -154,6 +155,10 @@ if !empty(glob("~/.config/nvim/plugged/ale/"))
 	let g:ale_linters = {'c': 'all'}
 endif
 
+if !empty(glob("~/.config/nvim/plugged/tagbar/"))
+	nnoremap <leader>b :TagbarToggle<cr>
+	let g:tagbar_width = 70
+endif
 " command mode arrows
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>

@@ -14,7 +14,7 @@ sudo apt install -y dkms virtualbox-guest-dkms git vim curl cscope \
 	libstdc++6:i386 gdebi-core qemu python neovim python-dev python-pip \
 	python3-dev python3-pip gem libffi-dev libssl-dev libxml2-dev \
 	libxslt1-dev libjpeg8-dev zlib1g-dev ruby-dev python2.7-dev \
-	libncurses5-dev libelf-dev
+	libncurses5-dev libelf-dev quilt exuberant-ctags
 
 sudo touch /var/log/atftpd.log
 sudo chmod 644 /var/log/atftpd.log

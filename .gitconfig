@@ -10,7 +10,7 @@
 	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
 	oneline = log  --pretty=format:'%Cred%h%C(blue) <%><(15,trunc)%an> %C(yellow)%s'
 	diffmeld = difftool -d --tool=meld
-	diffbc = difftool -d --tool=bc
+	bc = difftool -d --tool=bc
 	mergemeld = mergetool -d --tool=meld
 	co = checkout
 	b = branch
