@@ -443,3 +443,15 @@ pyscope()
 {
   find . -name '*.py' > cscope.files && cscope -Rb
 }
+
+dislocker_mount()
+{
+	sudo dislocker  -v -V  /dev/sda  /media/bitlocker -u
+	sudo mount -o loop /media/bitlocker/dislocker-file /media/mount \
+		-o nonempty 
+}
+
+dislocker_umount()
+{
+	sudo umount /media/mount && sudo umount /media/bitlocker 
+}

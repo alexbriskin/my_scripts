@@ -11,7 +11,6 @@ if filereadable(glob('~/.config/nvim/autoload/plug.vim'))
 	Plug 'https://github.com/stefandtw/quickfix-reflector.vim.git'
 	Plug 'https://github.com/Valloric/YouCompleteMe.git'
 	Plug 'https://github.com/w0rp/ale.git'
-	Plug 'https://github.com/majutsushi/tagbar.git'
 	" ------------Plug-ins Above ---------
 	call plug#end()
 else
@@ -108,10 +107,10 @@ inoremap jj <esc>
 nnoremap Y y$<CR>
 
 " Remap some movements to be in cemter of the screen
-nnoremap {{ {{zz
-nnoremap }} }}zz
-nnoremap [[ [[zz
-nnoremap ]] ]]zz
+" nnoremap {{ {{zz
+" nnoremap }} }}zz
+" nnoremap [[ [[zz
+" nnoremap ]] ]]zz
 nnoremap n nzz
 nnoremap N Nzz
 nnoremap * *zz
@@ -131,8 +130,8 @@ nnoremap <Leader>c "+y
 nnoremap <Leader>v "+p
 nnoremap <Leader>V "+P
 
-" delete blocks
-nnoremap <Leader>d d%
+" delete buffers
+nnoremap <leader>d :bdelete<cr>
 
 " Vim airline specific configurations
 if !empty(glob("~/.config/nvim/plugged/vim-airline/"))
@@ -155,10 +154,6 @@ if !empty(glob("~/.config/nvim/plugged/ale/"))
 	let g:ale_linters = {'c': 'all'}
 endif
 
-if !empty(glob("~/.config/nvim/plugged/tagbar/"))
-	nnoremap <leader>b :TagbarToggle<cr>
-	let g:tagbar_width = 70
-endif
 " command mode arrows
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
