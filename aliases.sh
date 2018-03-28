@@ -441,7 +441,7 @@ chdir()
 echo Hello, Alex
 pyscope()
 {
-  find . -name '*.py' > cscope.files && cscope -Rb
+  find . -name '*.py' > cscope.files && cscope -Rbq
 }
 
 dislocker_mount()
