@@ -152,8 +152,11 @@ if !empty(glob("~/.config/nvim/plugged/ale/"))
 	nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 	nmap <silent> <C-j> <Plug>(ale_next_wrap)
 	let g:ale_linters = {'c': 'all'}
+	let g:ale_c_clangtidy_checks = ['-llvm-include-order']
 endif
 
+if !empty(glob("~/.config/nvim/plugged/YouCompleteMe/"))
+endif
 " command mode arrows
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
