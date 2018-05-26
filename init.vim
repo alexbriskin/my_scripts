@@ -90,7 +90,7 @@ nnoremap <leader>nt :call NumberToggle()<CR>
 map <space> <leader>
 
 if has("autocmd")
-  autocmd FileType c,cpp setlocal expandtab sw=2 cino=(0,:N0,t0 ts=4
+  autocmd FileType c,cpp,html setlocal expandtab sw=2 cino=(0,:N0,t0 ts=4
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") |
 	\exe "normal! g'\"" | endif
 endif
@@ -152,6 +152,7 @@ if !empty(glob("~/.config/nvim/plugged/ale/"))
 	nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 	nmap <silent> <C-j> <Plug>(ale_next_wrap)
 	let g:ale_linters = {'c': 'all'}
+	let g:ale_python_pylint_executable = 'pylint3'
 	let g:ale_c_clangtidy_checks = ['-llvm-include-order']
 endif
 
