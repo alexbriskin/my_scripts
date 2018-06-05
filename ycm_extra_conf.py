@@ -1,14 +1,24 @@
+#!/usr/bin/python3.6
 import os
 from pathlib import PurePath
 from glob import glob
 from os.path import dirname
+from  itertools import product
 
 flags = ['-Wall', '-Wextra', '-Werror', '-Wno-long-long',
-         '-Wno-variadic-macros', '-std=c99']
+         '-Wno-variadic-macros', '-std=c99',
+         '-pipe', '-MD', '-MP', '-ggdb', '-fPIC', '-Wall', '-Werror',
+         '-Wstrict-prototypes', '-D_TR_MODULE="wlan_ocb.c"',
+         '-std=gnu99',
+         '-mcpu=cortex-m3', '-mthumb',
+         '-fdata-sections', '-ffunction-sections',
+         '-D__ATLK_TARGET_CORTEX_M3=1',
+         '-D__THREADX__=1',
+         '-DUSB', '-std=gnu99']
 
 inc_dirs = {dirname(PurePath(f)) for f in glob('**/*.h', recursive=True)}
-inc_dirs_level2 = {dirname(d) for d in inc_dirs}
-flags = flags + list(inc_dirs.union(inc_dirs_level2))
+inc_dirs = inc_dirs.union({dirname(d) for d in inc_dirs})
+flags += list(' %s%s' % p for p  in product(['-I'], inc_dirs))
 
 
 # Set this to the absolute path to the folder (NOT the file!) containing the

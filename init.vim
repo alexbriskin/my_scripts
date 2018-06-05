@@ -156,8 +156,11 @@ if !empty(glob("~/.config/nvim/plugged/ale/"))
 	let g:ale_c_clangtidy_checks = ['-llvm-include-order']
 endif
 
-if !empty(glob("~/.config/nvim/plugged/YouCompleteMe/"))
+if !empty(glob("~/.config/nvim/plugged/YouCompleteMe"))
+	let g:ycm_python_binary_path = '/usr/bin/python3.6'
+	let g:ycm_server_python_interpreter = '/usr/bin/python3.6'
 endif
+
 " command mode arrows
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
