@@ -9,7 +9,7 @@ sudo add-apt-repository ppa:jonathonf/vim
 sudo add-apt-repository -y ppa:neovim-ppa/stable
 sudo apt-get update
 sudo apt install -y dkms git git-gui vim curl cscope noevim nodejs npm\
-	thunar minicom mate-terminal xclip realpath cmake doxygen nfs-common\
+	minicom xclip cmake doxygen nfs-common\
 	u-boot-tools atftp ssh g++ make mercurial pandoc tmux cifs-utils\
 	openjdk-9-jre-headless smitools meld atftpd ssh g++ make mercurial \
 	pandoc openjdk-9-jre-headless smitools meld atftpd xinetd \
@@ -24,11 +24,11 @@ sudo apt install -y dkms git git-gui vim curl cscope noevim nodejs npm\
 git config --global core.editor "vim"
 sudo touch /var/log/atftpd.log
 sudo chmod 644 /var/log/atftpd.log
-sudo mkdir -p /tftpboot
-[ ! -f /etc/default/atftpd ] && cat <<EOF | sudo tee /etc/default/atftpd
-USE_INETD=false
-OPTIONS="--tftpd-timeout 300 --retry-timeout 5 --mcast-port 1758 --mcast-addr 239.239.239.0-255 --mcast-ttl 1 --maxthread 100 --verbose=5 /tftpboot --logfile /var/log/atftpd.log"
-EOF
+# sudo mkdir -p /tftpboot
+# [ ! -f /etc/default/atftpd ] && cat <<EOF | sudo tee /etc/default/atftpd
+# USE_INETD=false
+# OPTIONS="--tftpd-timeout 300 --retry-timeout 5 --mcast-port 1758 --mcast-addr 239.239.239.0-255 --mcast-ttl 1 --maxthread 100 --verbose=5 /tftpboot --logfile /var/log/atftpd.log"
+# EOF
 
 BCOMPARE=bcompare-4.2.4.22795_amd64.deb
 wget https://www.scootersoftware.com/${BCOMPARE}

@@ -89,11 +89,9 @@ nnoremap <leader>nt :call NumberToggle()<CR>
 " Leader set to SPACE
 map <space> <leader>
 
-if has("autocmd")
-  autocmd FileType c,cpp,html setlocal expandtab sw=2 cino=(0,:N0,t0 ts=4
-  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") |
-	\exe "normal! g'\"" | endif
-endif
+autocmd FileType c,cpp,html setlocal expandtab sw=2 cino=(0,:N0,t0 ts=4
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") |
+\exe "normal! g'\"" | endif
 
 " search visual selection
 vnoremap // y/<C-R>"<CR>
@@ -174,3 +172,14 @@ if has('nvim')
 	let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
 	tnoremap <Esc> <C-\><C-n>
 endif
+
+
+" Python Stuff
+au FileType python set omnifunc=pythoncomplete#Complete
+au FileType python setlocal expandtab shiftwidth=4 tabstop=4 smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
+au BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
+au FileType python set foldmethod=indent foldlevel=99
+
+" Ignore Errors
+let g:flake8_ignore=""
+"let g:flake8_ignore="E501,W293"
