@@ -1,5 +1,8 @@
 #!/bin/bash
+export BASH_PROFILE=$(readlink -f ${BASH_SOURCE[0]})
+export MYSCRIPTS=$(dirname ${BASH_PROFILE})
 
+source ${MYSCRIPTS}/aliases.sh
 # Useful prompt
 GIT_PROMPT=/etc/bash_completion.d/git-prompt
 [ -f ${GIT_PROMPT} ] && source ${GIT_PROMPT} || echo no GIT_PROMPT file

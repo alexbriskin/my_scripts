@@ -8,7 +8,7 @@ echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sud
 sudo add-apt-repository ppa:jonathonf/vim
 sudo add-apt-repository -y ppa:neovim-ppa/stable
 sudo apt-get update
-sudo apt install -y dkms git git-gui vim curl cscope noevim nodejs npm\
+sudo apt install -y dkms git git-gui vim curl cscope nodejs npm\
 	minicom xclip cmake doxygen nfs-common\
 	u-boot-tools atftp ssh g++ make mercurial pandoc tmux cifs-utils\
 	openjdk-9-jre-headless smitools meld atftpd ssh g++ make mercurial \

@@ -1,6 +1,3 @@
-export ALIASES=$(readlink -f ${BASH_SOURCE[0]})
-export MYSCRIPTS=$(dirname ${ALIASES})
-export NETDIR=/mnt/cernd/_Users/AlexBr
 alias lt='ls -l -t'
 alias asu='sudo su'
 alias tfx='tar xavf'
